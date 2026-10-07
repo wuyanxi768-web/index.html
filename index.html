@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAMAMA TMAX - MAX IS IN DETAILS | 台灣山葉機車</title>
+
+  <!-- ==========================================
+       CSS 樣式區 (純 CSS，無外部套件)
+       ========================================== -->
+  <style>
+    /* ==========================================
+       1. 全域變數與基礎重置 (Global Variables & Reset)
+       ------------------------------------------
+       在這裡設定顏色、字體與間距，方便全站統一修改。
+       ========================================== */
+    :root {
+      /* 【顏色設定區】 */
+      --color-primary: #d32f2f;       /* YAMAHA 品牌紅 */
+      --color-primary-dark: #b71c1c;  /* 深紅 (用於 Hover 效果) */
+      --color-bg-black: #0d0d0d;      /* 主背景黑 */
+      --color-bg-dark: #1a1a1a;       /* 區塊背景深灰 */
+      --color-bg-card: #262626;       /* 卡片背景灰 */
+      --color-text-light: #ffffff;    /* 主文字白 */
+      --color-text-gray: #aaaaaa;     /* 次要文字灰 */
+      --color-border: #333333;        /* 邊框顏色 */
+
+      /* 【區塊間距設定區】 */
+      --section-padding-desktop: 80px 20px; /* 電腦版上下間距 */
+      --section-padding-mobile: 40px 15px;  /* 手機版上下間距 */
+      --container-max-width: 1200px;        /* 頁面最大寬度 */
+    }
+
+    /* 重置基本元素邊距 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--color-bg-black);
+      color: var(--color-text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 版面固定容器 */
+    .container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 通用按鈕樣式 */
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background-color: var(--color-primary);
+      color: var(--color-text-light);
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* 區塊通用標題 */
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* 標題下方的紅色裝飾線 */
+    .section-title h2::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 3px;
+      background-color: var(--color-primary);
+      margin: 8px auto 0;
+    }
+
+    .section-title p {
+      color: var(--color-text-gray);
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    /* ==========================================
+       2. 頂部導覽列 (Navbar)
+       ========================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background-color: rgba(13, 13, 13, 0.95);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--color-text-light);
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* ==========================================
+       3. 英雄視覺區塊 (Hero Banner)
+       ========================================== */
+    .hero {
+      height: 100vh;
+      /* 使用黑灰色漸層與模擬跑車圖案背景 */
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(13,13,13,1) 100%),
+                  url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 70px; /* 避開 navbar 高度 */
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-subtitle {
+      color: var(--color-primary);
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 6px;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #dddddd;
+      margin-bottom: 35px;
+    }
+
+    /* ==========================================
+       4. 特點簡介區塊 (Features Section)
+       ========================================== */
+    .features-section {
+      padding: var(--section-padding-desktop);
+      background-color: var(--color-bg-black);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px; /* 卡片之間的間距 */
+    }
+
+    .feature-card {
+      background-color: var(--color-bg-dark);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(211, 47, 47, 0.2);
+      border-color: var(--color-primary);
+    }
+
+    .feature-img {
+      width: 100%;
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .feature-info {
+      padding: 25px;
+    }
+
+    .feature-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--color-text-light);
+    }
+
+    .feature-info p {
+      color: var(--color-text-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       5. 車款規格表 (Specification Section)
+       ========================================== */
+    .spec-section {
+      padding: var(--section-padding-desktop);
+      background-color: var(--color-bg-dark);
+    }
+
+    .spec-table-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--color-bg-black);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid var(--color-border);
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .spec-table th, .spec-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .spec-table th {
+      width: 35%;
+      color: var(--color-primary);
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .spec-table td {
+      color: var(--color-text-light);
+    }
+
+    .spec-table tr:last-child th,
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ==========================================
+       6. 頁尾區塊 (Footer)
+       ========================================== */
+    .footer {
+      background-color: #000000;
+      padding: 40px 20px;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      color: var(--color-text-gray);
+      font-size: 0.85rem;
+    }
+
+    .footer p {
+      margin-bottom: 10px;
+    }
+
+    /* ==========================================
+       7. 響應式設計 (RWD for Mobile)
+       ========================================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* 手機版簡化隱藏選單 */
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .features-section, .spec-section {
+        padding: var(--section-padding-mobile); /* 手機版縮小區塊上下間距 */
+      }
+
+      .spec-table th, .spec-table td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. 導覽列 (Navbar)
+       ========================================== -->
+  <nav class="navbar">
+    <div class="container">
+      <!-- 品牌 Logo，修改文字請至下方 -->
+      <a href="#" class="logo">YAMAMA <span>TTTTMAX</span></a>
+      
+      <!-- 導覽選單 -->
+      <ul class="nav-links">
+        <li><a href="#overview">車款概述</a></li>
+        <li><a href="#features">特色配備</a></li>
+        <li><a href="#spec">詳細規格</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       2. 英雄視覺區塊 (Hero Section)
+       ========================================== -->
+  <section class="hero" id="overview">
+    <div class="hero-content">
+      <!-- 修改標題文字區 -->
+      <div class="hero-subtitle">Nothing but the MAX</div>
+      <h1 class="hero-title">MAX IS IN DETAILS</h1>
+      <p class="hero-desc">全新 TMAX 承襲旗艦運動基因與日常實用性，以更銳利的線條打造強悍新面貌。</p>
+      <a href="#features" class="btn">探索專屬配備</a>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       3. 車款特色區塊 (Features Section)
+       ========================================== -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <!-- 區塊標題 -->
+      <div class="section-title">
+        <h2>車款亮點</h2>
+        <p>結合歐洲頂尖設計與日本造車工藝</p>
+      </div>
+
+      <!-- 卡片網格 -->
+      <div class="features-grid">
+        
+        <!-- 卡片 1 -->
+        <div class="feature-card">
+          <div class="feature-img" style="background-image: url('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="feature-info">
+            <h3>7 吋 TFT 全彩儀表</h3>
+            <p>具備三種顯示主題，支援 MyRide – Link 智慧手機連線，可進行電話接聽、音樂控制與 Garmin 全地圖導航功能。</p>
+          </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="feature-card">
+          <div class="feature-img" style="background-image: url('https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="feature-info">
+            <h3>562c.c. 並列雙缸引擎</h3>
+            <p>強悍的 562c.c. 水冷引擎採用 360 度曲軸點火角，創造專屬低沉聲浪，標配 TCS 循跡防滑與 D-MODE 動力模式。</p>
+          </div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="feature-card">
+          <div class="feature-img" style="background-image: url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="feature-info">
+            <h3>全新運動化車身與 LED 燈組</h3>
+            <p>纖細雙 LED 大燈與整合式 T 字型 LED 尾燈，搭配標誌性迴旋鏢側蓋，展現極具侵略感的流線跑格。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. 車款規格區塊 (Specification Section)
+       ========================================== -->
+  <section class="spec-section" id="spec">
+    <div class="container">
+      <!-- 區塊標題 -->
+      <div class="section-title">
+        <h2>規格配備</h2>
+        <p>TMAX / TMAX Tech MAX 規格數據</p>
+      </div>
+
+      <!-- 規格表格 -->
+      <div class="spec-table-container">
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <th>引擎形式</th>
+              <td>562 c.c. 水冷 4 行程並列雙缸 DOHC 4V</td>
+            </tr>
+            <tr>
+              <th>最大馬力</th>
+              <td>47.6 PS / 7,500 rpm</td>
+            </tr>
+            <tr>
+              <th>最大扭力</th>
+              <td>5.7 kg-m / 5,250 rpm</td>
+            </tr>
+            <tr>
+              <th>前懸吊系統</th>
+              <td>Φ 41 mm 倒立式前叉</td>
+            </tr>
+            <tr>
+              <th>煞車系統</th>
+              <td>前雙碟 (Φ267mm) + 輻射卡鉗 / 彎道 ABS</td>
+            </tr>
+            <tr>
+              <th>長 × 寬 × 高</th>
+              <td>2,195 × 780 × 1,525 mm</td>
+            </tr>
+            <tr>
+              <th>座高 / 重量</th>
+              <td>800 mm / 220 kg</td>
+            </tr>
+            <tr>
+              <th>油箱容量</th>
+              <td>15 公升</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. 頁尾 (Footer)
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© YAMAMA MOTOR TAIWAN CO., LTD. All Rights Reserved.</p>
+      <p>本網頁為 HTML/CSS 網頁設計復刻練習作品，圖片與商標版權歸原公司所有。</p>
+    </div>
+  </footer>
+
+</body>
+</html>
